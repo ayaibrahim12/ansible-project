@@ -1,0 +1,17 @@
+
+- hosts: all 
+  remote_user: ubuntu
+  become: yes
+  vars: 
+    - package: nginx
+    - version: present
+  tasks: 
+  - name: apt update
+    tags: first_task(update)
+    apt :
+      update_cache: yes
+  - name: apt install  nginx
+    tags: second_task(install)
+    apt:
+        name: "{{package}}"
+        state: "{{version}}"

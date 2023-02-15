@@ -1,0 +1,17 @@
+- hosts: all
+    
+  tasks:
+  - name: my task1 with conditions
+    apt:
+      name: nginx
+    when: ansible_facts['distribution'] == "Ubuntu" 
+    register: value
+  - name: varible
+    service: 
+      name: nginx
+      state: restarted 
+    when: value.changed == true 
+  - name: debug
+    debug:
+      var: value
+    when: value.changed == true  

@@ -1,0 +1,11 @@
+- hosts: all 
+  remote_user: ubuntu
+  become: yes
+  tasks: 
+  - name: loop
+    apt:
+      name: nginx
+      state: "{{item}}"
+    loop:
+      -latest
+      -absent 

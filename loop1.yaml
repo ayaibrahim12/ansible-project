@@ -1,0 +1,11 @@
+- hosts: all 
+  remote_user: ubuntu
+  become: yes
+  tasks: 
+  - name: loop
+    apt:
+      name: "{{ item.package_name }}"
+      state: "{{ item.package_state }}"
+    loop:
+     - { package_name: "nginx" , package_state: "present" }
+     - { package_name: "curl" , package_state: "absent" }
